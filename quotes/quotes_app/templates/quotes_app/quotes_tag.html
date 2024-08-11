@@ -1,0 +1,24 @@
+{% extends 'quotes_app/base.html' %} {% load extract %} {% block content %}
+
+<h2 class="mb-5">
+    Quotes with tag:
+    <span class="btn btn-primary">{{ tag.name }}</span>
+</h2>
+<div class="quotes-wrapper mb-4 d-flex gap-4 flex-column">
+    {% for quote in quotes %}
+    <div class="card shadow" style="width: 100%">
+        <div class="card-body">
+            <p class="card-text">{{quote.quote}}</p>
+            <div class="card-subtitle text-body-secondary fw-semibold">
+                <span>by</span>
+                <span class="fst-italic">{{quote.author|author}}</span>
+                <a
+                    href="{% url 'quotes_app:author_info' author_id=quote.author.id %}"
+                    >(about)</a
+                >
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

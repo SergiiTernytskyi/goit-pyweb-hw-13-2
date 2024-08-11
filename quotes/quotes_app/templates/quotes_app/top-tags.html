@@ -1,0 +1,14 @@
+{% extends 'quotes_app/base.html' %} {% load extract %} {% block content %}
+<h2 class="mb-5">
+    <p>Top 10 tags:</p>
+
+    {% for tag in top_tags %}
+    <a
+        href="{% url 'quotes_app:quote_by_tag' tag_id=tag.id %}"
+        class="btn btn-primary"
+        >{{tag|tag_name}}</a
+    >
+    {% endfor %}
+</h2>
+
+{% endblock %}

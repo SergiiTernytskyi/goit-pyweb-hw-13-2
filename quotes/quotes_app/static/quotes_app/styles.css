@@ -1,0 +1,47 @@
+.container-fluid{
+    padding: 0;
+    width: fit-content;
+    margin: 0;
+}
+
+.navbar {
+    padding: 16px 0;
+    margin-bottom: 24px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-logo{
+    text-decoration: none;
+    font-size: 40px;
+    width: fit-content;
+}
+
+.card-subtitle a{
+    text-decoration: none;
+}
+
+.next a{
+    text-decoration: none;
+}
+
+.pager{
+    margin: 0;
+    margin-bottom: 32px;
+    padding: 0;
+    list-style: none;
+}
+
+.errorlist{
+    list-style: none;    
+    color: #ff0000;
+}
+
+.add-author-form{
+    width: 600px;
+}
+
+.messages{
+    top: 20px;
+    right: 0;
+}

@@ -1,0 +1,74 @@
+{% extends 'quotes_app/base.html' %} {% load extract %} {% block content %}
+
+<!-- prettier-ignore  -->
+
+<div class="add-author-wrapper mb-4 d-flex gap-2 justify-content-between">
+    <a class="btn btn-primary justify-self-end" href="{% url 'quotes_app:top_tags' %}"
+        >Top ten tags</a
+    >
+
+    {% if user.is_authenticated %}
+    <div>
+        <a class="btn btn-primary" href="{% url 'quotes_app:author_add' %}"
+            >Add New Author</a
+        >
+        <a class="btn btn-primary" href="{% url 'quotes_app:quote_add' %}"
+            >Add New Quote</a
+        >
+    </div>
+    {% endif %}
+</div>
+
+<div class="quotes-wrapper mb-4 d-flex gap-4 flex-column">
+    {% for quote in quotes %}
+
+    <div class="card shadow" style="width: 100%">
+        <div class="card-body">
+            <p class="card-text">{{quote.quote}}</p>
+            <div class="card-subtitle mb-4 text-body-secondary fw-semibold">
+                <span>by</span>
+                <span class="fst-italic">{{quote.author|author}}</span>
+                <a
+                    href="{% url 'quotes_app:author_info' author_id=quote.author.id %}"
+                    >(about)</a
+                >
+            </div>
+
+            <div class="tags-wrapper mb-4 d-flex gap-2">
+                {% for tag in quote.tags %}
+                <a
+                    href="{% url 'quotes_app:quote_by_tag' tag_id=tag.id %}"
+                    class="btn btn-outline-primary btn-sm"
+                    >{{tag|tag_name}}</a
+                >
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li
+            class="page-item {% if not quotes.has_previous %} disabled {% endif %}"
+        >
+            <a
+                class="page-link"
+                href="{% if quotes.has_previous %} {% url 'quotes_app:root_paginate' quotes.previous_page_number %} {% else %} # {% endif %}"
+                >Previous</a
+            >
+        </li>
+
+        <li class="page-item">
+            <a
+                class="page-link {% if not quotes.has_next %} disabled {% endif %}"
+                href="{% if quotes.has_next %} {% url 'quotes_app:root_paginate' quotes.next_page_number %} {% else %} # {% endif %}"
+                >Next</a
+            >
+        </li>
+    </ul>
+</nav>
+
+{% endblock %}
